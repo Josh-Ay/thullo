@@ -25,9 +25,12 @@ const InvitationPageContent = () => {
 
     const {
         setAllBoardsLoaded,
+        setCurrentBoardDetails,
     } = useAppContext();
 
     useEffect(() => {
+        setCurrentBoardDetails(null);
+
         if (inviteProcessed) {
             setLoading(false);
             setResult('');

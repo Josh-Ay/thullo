@@ -59,3 +59,12 @@
     height: 15rem;
   }
 }
+
+@media (min-width: 767.98px) and (max-width: 991.98px) {
+  .home__Wrap {
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 8rem;
+  }
+}

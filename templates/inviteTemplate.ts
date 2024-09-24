@@ -4,7 +4,7 @@ export const inviteEmailTemplate = `
         <img
             src={{ logoImg }}
             alt='thullo logo'
-            style='max-width: 100%; width: 45%;'
+            style='max-width: 100%; width: 5rem;'
         />
 
         <p>Hello there!</p>

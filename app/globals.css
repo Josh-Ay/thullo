@@ -38,3 +38,9 @@
     right: 0;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .main__Layout {
+    margin-top: 0;
+  }
+}

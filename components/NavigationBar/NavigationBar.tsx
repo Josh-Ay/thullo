@@ -27,11 +27,13 @@ const NavigationBar = () => {
     const [searchLoading, setSearchLoading] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [searchResults, setSearchResults] = useState<SearchResultFormatType | null>(null);
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     const pathname = usePathname();
     const router = useRouter();
 
     const searchBarRef = useRef<HTMLDivElement>(null);
+    const navActionRef = useRef<HTMLDivElement>(null);
 
     const searchService = new SearchService();
 
@@ -41,6 +43,11 @@ const NavigationBar = () => {
             setSearchResults(null);
             setSearchValue('');
         },
+    });
+
+    useClickOutside({
+        elemRef: navActionRef,
+        handleClickOutside: () => setShowMobileMenu(false),
     })
 
     useEffect(() => {
@@ -133,9 +140,13 @@ const NavigationBar = () => {
                 fontSize={'1.5rem'}
                 cursor={'pointer'}
                 className={styles.mobile__Menu}
+                onClick={() => setShowMobileMenu(true)}
             />
 
-            <section className={styles.nav__Actions__Wrap}>
+            <section 
+                className={`${styles.nav__Actions__Wrap} ${showMobileMenu ? styles.mobile__Nav : ''}`}
+                ref={navActionRef}
+            >
                 {
                     status === 'loading' ? <>
                         <Spinner

@@ -55,3 +55,9 @@
     height: 2rem;
   }
 }
+
+@media (min-width: 767.98px) and (max-width: 991.98px) {
+  .board__Card__Item {
+    width: calc(calc(100% - calc(2rem * 2)) / 3);
+  }
+}

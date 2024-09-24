@@ -211,6 +211,12 @@
   .card__Modal {
     width: 95%;
   }
+}
+
+@media screen and (max-width: 991.98px) {
+  .card__Modal {
+    width: 90%;
+  }
 
   .details__Wrap {
     flex-direction: column-reverse;

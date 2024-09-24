@@ -74,6 +74,8 @@ const BoardsTitleSection = ({
             const newBoardData = await boardService.createNewBoard({
                 title: newBoardDetails.title,
                 coverImage: newBoardDetails.coverImage,
+                coverImageAuthor: newBoardDetails.coverImageAuthor,
+                coverImageAuthorProfile: newBoardDetails.coverImageAuthorProfile,
                 visibility: newBoardDetails.visibility,
             });
 

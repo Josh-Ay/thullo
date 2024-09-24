@@ -25,6 +25,8 @@ const LabelAdd = ({
     cardLabels: CardLabelType[],
 }) => {
     const {
+        allBoards,
+        setAllBoards,
         currentBoardDetails,
         setCurrentBoardDetails,
     } = useAppContext();
@@ -53,7 +55,11 @@ const LabelAdd = ({
         if (newLabelDetail.color.length < 1) return toast.info('Please select a color for your label');
         if (loading) return;
 
-        const copyOfBoardDetails: BoardType = JSON.parse(JSON.stringify(currentBoardDetails));
+        const copyOfAllBoards: BoardType[] = allBoards.slice();
+        
+        const foundBoardDetails = copyOfAllBoards.find(board => board.id === currentBoardDetails?.id);
+        if (!foundBoardDetails) return;
+
         const updatedCardLabels = labels.slice();
 
         setLoading(true);
@@ -70,7 +76,7 @@ const LabelAdd = ({
             setNewLabelDetail(initialLabelDetails);
             setLoading(false);
 
-            const foundCardListing = copyOfBoardDetails.lists.find(list => list.id === listId);
+            const foundCardListing = foundBoardDetails.lists.find(list => list.id === listId);
             if (!foundCardListing) return;
 
             const copyOfCardsInList = foundCardListing.cards.slice();
@@ -81,7 +87,9 @@ const LabelAdd = ({
             copyOfCardsInList[foundEditedCardIndex].labels = updatedCardLabels;
             foundCardListing.cards = copyOfCardsInList;
 
-            setCurrentBoardDetails(copyOfBoardDetails);
+            setCurrentBoardDetails(foundBoardDetails);
+            setAllBoards(copyOfAllBoards);
+
         } catch (error) {
             setLoading(false);
         }

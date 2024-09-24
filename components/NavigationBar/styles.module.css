@@ -65,6 +65,7 @@
   .nav__Bar {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    position: relative;
   }
 
   .mobile__Menu {
@@ -73,5 +74,29 @@
 
   .logo {
     width: 30px;
+  }
+
+  .nav__Actions__Wrap.mobile__Nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    z-index: 10;
+    right: 0;
+    gap: 1rem;
+    align-items: flex-end;
+    padding-right: 2rem;
+    padding-bottom: 1.5rem;
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+}
+
+@media (min-width: 767.98px) and (max-width: 991.98px) {
+  .board__Detail__Wrap {
+    display: none;
   }
 }
