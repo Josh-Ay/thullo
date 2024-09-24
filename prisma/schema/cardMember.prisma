@@ -1,0 +1,11 @@
+model CardMembers {
+  id        String   @id @default(uuid())
+  card      Card     @relation(references: [id], fields: [cardId])
+  cardId    String
+  user      User     @relation(references: [id], fields: [userId])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("card_members")
+}

@@ -1,0 +1,128 @@
+.board__Details__Sidebar {
+  background-color: #fff;
+  box-shadow: 0px 4px 12px 0px #0000000d;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22%;
+  height: 100%;
+  animation: var(--fade-in-from-right-transition) 0.45s ease-in-out;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.board__Details__Sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.top__Row__Wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.top__Row,
+.creator__Title,
+.creator__Wrap,
+.edit__Btn,
+.description__Title__Wrap,
+.actions__Wrap {
+  display: flex;
+  align-items: center;
+}
+
+.top__Row {
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.7rem;
+}
+
+.top__Row h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.035em;
+}
+
+.creator__Title {
+  gap: 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: -0.035em;
+  color: #bdbdbd;
+}
+
+.creator__Wrap {
+  gap: 1.2rem;
+}
+
+.creator__Img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 12px;
+}
+
+.creator__Details h5 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.035em;
+  color: #333333;
+}
+
+.creator__Details p {
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 13.62px;
+  letter-spacing: -0.035em;
+  color: #bdbdbd;
+}
+
+.edit__Btn {
+  justify-content: center;
+}
+
+.description__Wrap,
+.members__Wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.description__Title__Wrap {
+  gap: 1.2rem;
+}
+
+.description {
+  border: none;
+  outline: none;
+  border: 1px solid #bdbdbd;
+  border-radius: 8px;
+  resize: none;
+  font-size: 0.875rem;
+  line-height: 19.07px;
+  letter-spacing: -0.035em;
+  padding: 1rem;
+}
+
+.actions__Wrap {
+  gap: 0.4rem;
+}
+
+.description__Text {
+  font-size: 0.875rem;
+  line-height: 19.07px;
+  letter-spacing: -0.035em;
+  white-space: pre-line;
+}
+
+@media screen and (max-width: 767px) {
+  .board__Details__Sidebar {
+    width: 80%;
+  }
+}

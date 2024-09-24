@@ -1,0 +1,22 @@
+.file__Preview,
+.file__Preview__2 {
+  height: 4.1rem;
+  border-radius: 8px;
+}
+
+.file__Preview {
+  width: 100%;
+}
+
+.file__Preview__2 {
+  background-color: #e0e0e0;
+  color: #4f4f4f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}

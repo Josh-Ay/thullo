@@ -1,0 +1,143 @@
+.title__WRap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title__WRap h3 {
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 27px;
+  letter-spacing: -0.035em;
+}
+
+.new__Board__Modal__Wrap {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10rem;
+}
+
+.new__Board__Modal {
+  background-color: #fff;
+  width: 20.1%;
+  height: max-content;
+  max-height: 54.55%;
+  min-height: 19rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: visible;
+}
+
+.close__Btn {
+  position: absolute !important;
+  right: 0 !important;
+  top: 0.5rem !important;
+  z-index: 2 !important;
+}
+
+.board__Img {
+  border-radius: 8px;
+  width: 100%;
+  height: 5rem;
+  object-fit: cover;
+}
+
+.new__Board__Modal,
+.top__Details {
+  display: flex;
+  flex-direction: column;
+}
+
+.top__Details {
+  gap: 0.8rem;
+}
+
+.new__Board__Modal {
+  gap: 1.5rem;
+}
+
+.board__Setting__Row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+}
+
+.board__Setting__Row.bottom {
+  width: 75%;
+  margin-left: auto;
+}
+
+.photo__Search__Wrap,
+.board__Visibility__Selector {
+  position: absolute;
+  top: 100%;
+}
+
+.photo__Search__Wrap {
+  left: 0;
+}
+
+.board__Visibility__Selector {
+  right: 0;
+}
+
+.board__Img,
+.no__Image__Content {
+  height: 5rem;
+}
+
+.no__Image__Content {
+  border: 1px dashed #828282;
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: #d3d3d3;
+}
+
+.image__Wrap {
+  position: relative;
+}
+
+.author__Details {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  width: 100%;
+  font-size: 0.75rem;
+  color: #fff !important;
+  text-align: center;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.author__Details a {
+  color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .new__Board__Modal {
+    width: 95%;
+  }
+
+  .no__Image__Content,
+  .board__Img {
+    height: 10rem;
+  }
+}

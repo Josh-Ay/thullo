@@ -1,0 +1,46 @@
+.members {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.member__Item,
+.member__Item__Detail {
+  display: flex;
+  align-items: center;
+}
+
+.member__Item {
+  justify-content: space-between;
+}
+
+.member__Item__Detail {
+  gap: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.035em;
+  color: #333333;
+}
+
+.creator__Img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 12px;
+}
+
+.admin {
+  color: #828282;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.035em;
+}
+
+.other__Members {
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 16.34px;
+  letter-spacing: -0.035em;
+  color: #bdbdbd;
+}

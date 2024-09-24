@@ -1,0 +1,35 @@
+.add__New__Item__Col {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+}
+
+.new__Canvas__Item {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  height: 7.2rem;
+  border-radius: 12px;
+  width: 15.5rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.4rem;
+  box-shadow: 0px 2px 8px 0px #0000001a;
+}
+
+.new__Canvas__Item textarea {
+  border: none;
+  outline: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 19.07px;
+  letter-spacing: -0.035em;
+  width: 100%;
+  min-height: 3rem;
+  resize: none;
+}
+
+.new__Canvas__Item input::placeholder {
+  color: #bdbdbd;
+}

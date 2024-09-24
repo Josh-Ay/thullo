@@ -1,0 +1,28 @@
+.app__Label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.app__Label input {
+  all: unset;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.035em;
+  cursor: auto;
+  transition: 0.25s ease-in-out;
+}
+
+.app__Label input:focus-within {
+  border-color: var(--primary-blue-color);
+}
+
+.app__Label input::placeholder {
+  color: #bdbdbd;
+}

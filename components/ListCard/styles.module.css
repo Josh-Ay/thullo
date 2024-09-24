@@ -1,0 +1,72 @@
+.list__card {
+  box-shadow: 0px 4px 12px 0px #0000000d;
+  background-color: #fff;
+  padding: 1.5rem 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  cursor: pointer;
+}
+
+.list__card.card__Dragging {
+  background-color: var(--pale-blue-bg-color-2);
+  min-height: 12.75rem;
+  border: 1px dotted var(--primary-blue-color);
+}
+
+.card__Img {
+  height: 8.125rem;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 21.79px;
+  letter-spacing: -0.035em;
+}
+
+.bottom__Section,
+.bottom__Section__Item,
+.card__Stat {
+  display: flex;
+  align-items: center;
+}
+
+.bottom__Section {
+  justify-content: space-between;
+}
+
+.bottom__Section__Item {
+  gap: 0.5rem;
+}
+
+.card__Stat {
+  gap: 0.2rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+  line-height: 13.62px;
+  letter-spacing: -0.035em;
+  color: #bdbdbd;
+}
+
+.members {
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: 0.6rem !important;
+  align-items: center !important;
+}
+
+.add__Member__Wrap {
+  position: relative;
+}
+
+.member__Assign {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  cursor: initial;
+}

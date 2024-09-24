@@ -1,0 +1,17 @@
+model Board {
+  id                      String         @id @default(uuid())
+  title                   String
+  description             String?        @db.Text
+  coverImage              String
+  visibility              String
+  creator                 User           @relation(references: [id], fields: [creatorId])
+  creatorId               String
+  members                 BoardMembers[]
+  lists                   List[]
+  coverImageAuthor        String?
+  coverImageAuthorProfile String?
+  createdAt               DateTime       @default(now())
+  updatedAt               DateTime       @updatedAt
+
+  @@map("boards")
+}

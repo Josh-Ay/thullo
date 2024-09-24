@@ -1,0 +1,20 @@
+.board__Canvas {
+  background-color: #f8f9fd;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  border-radius: 24px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  /* grid-template-columns: repeat(auto-fit, minmax(15.5rem, 0.1fr)); */
+  overflow: auto;
+  min-height: 72dvh;
+  max-height: 74dvh;
+  scrollbar-width: none;
+  flex-grow: 1;
+}
+
+.board__Canvas::-webkit-scrollbar {
+  display: none;
+}

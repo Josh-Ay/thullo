@@ -1,0 +1,57 @@
+.board__Card__Item {
+  background-color: #fff;
+  border-radius: 12px;
+  width: calc(calc(100% - calc(2rem * 3)) / 4);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-decoration: none;
+}
+
+.board__Img {
+  width: 100%;
+  height: 8.5rem;
+  max-width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 21.79px;
+  letter-spacing: -0.035em;
+  color: #000;
+}
+
+.members__Wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.other__Members {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 16.34px;
+  letter-spacing: -0.035em;
+  color: #bdbdbd;
+}
+
+@media screen and (max-width: 767px) {
+  .board__Card__Item {
+    width: 100%;
+  }
+
+  .board__Img {
+    height: 12rem;
+    object-fit: cover;
+  }
+
+  .member__Img {
+    width: 2rem;
+    height: 2rem;
+  }
+}

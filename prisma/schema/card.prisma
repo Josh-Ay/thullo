@@ -1,0 +1,23 @@
+model Card {
+  id                      String        @id @default(uuid())
+  title                   String
+  coverImage              String?
+  coverImageAuthor        String?
+  coverImageAuthorProfile String?
+  description             String?       @db.Text
+  cardIndex               Int
+  totalComments           Int           @default(0)
+  totalAttachments        Int           @default(0)
+  creator                 User          @relation(references: [id], fields: [creatorId])
+  creatorId               String
+  list                    List          @relation(references: [id], fields: [listId])
+  listId                  String
+  labels                  Label[]
+  attachments             Attachment[]
+  comments                Comment[]
+  members                 CardMembers[]
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+
+  @@map("cards")
+}

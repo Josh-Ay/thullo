@@ -1,0 +1,64 @@
+.single__Board__Page {
+  min-height: var(--min-content-height);
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.board__Top__Section {
+  justify-content: space-between;
+}
+
+.board__Top__Info,
+.board__Top__Section,
+.members__Wrap {
+  display: flex;
+  align-items: center;
+}
+
+.members__Wrap {
+  gap: 0.85rem;
+  position: relative;
+}
+
+.other__Members {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 16.34px;
+  letter-spacing: -0.035em;
+  color: #bdbdbd;
+}
+
+.board__Top__Info {
+  gap: 1.5rem;
+  min-width: 50%;
+}
+
+.board__Invite__Wrap,
+.board__Visibility__Selector {
+  position: absolute;
+  top: 100%;
+}
+
+.board__Visibility__Selector {
+  left: 0;
+}
+
+.board__Invite__Wrap {
+  left: 60%;
+}
+
+@media screen and (max-width: 767px) {
+  .board__Top__Section {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .menu__Info__Btn {
+    margin-left: auto !important;
+  }
+}

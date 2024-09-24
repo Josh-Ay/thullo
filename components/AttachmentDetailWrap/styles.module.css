@@ -1,0 +1,40 @@
+.attachment__Wrap,
+.attachment__Detail__Wrap,
+.actions__Wrap {
+  display: flex;
+  gap: 1rem;
+}
+
+.attachment__Wrap {
+  flex-direction: column;
+}
+
+.attachment__Detail__Wrap,
+.actions__Wrap {
+  align-items: center;
+}
+
+.attachment__Preview {
+  width: 6rem;
+}
+
+.attachment__Details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.add__Info {
+  font-size: 0.55rem;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: -0.035em;
+  color: #bdbdbd;
+}
+
+.title {
+  font-size: 0.65rem;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.035em;
+}

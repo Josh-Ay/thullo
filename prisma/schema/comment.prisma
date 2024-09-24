@@ -1,0 +1,12 @@
+model Comment {
+  id        String   @id @default(uuid())
+  author    User     @relation(references: [id], fields: [authorId])
+  authorId  String
+  comment   String   @db.Text
+  card      Card     @relation(references: [id], fields: [cardId])
+  cardId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("comments")
+}

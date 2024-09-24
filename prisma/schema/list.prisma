@@ -1,0 +1,14 @@
+model List {
+  id        String   @id @default(uuid())
+  title     String
+  listIndex Int
+  creator   User     @relation(references: [id], fields: [creatorId])
+  creatorId String
+  board     Board    @relation(references: [id], fields: [boardId])
+  boardId   String
+  cards     Card[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("lists")
+}

@@ -1,0 +1,10 @@
+.section__Title__Wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: -0.035em;
+  color: #bdbdbd;
+}

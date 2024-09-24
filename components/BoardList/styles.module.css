@@ -1,0 +1,82 @@
+.list__Item {
+  width: 15.5rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  min-height: 65dvh;
+}
+
+.list__Item.is__Dragging {
+  background-color: var(--pale-blue-bg-color-2);
+  border: 1px dotted var(--primary-blue-color);
+  border-radius: 8px;
+}
+
+.list__Item,
+.title__Row {
+  display: flex;
+}
+
+.title__Row {
+  align-items: center;
+  justify-content: space-between;
+  cursor: grab;
+  position: relative;
+}
+
+.title__Row h4 {
+  color: #333;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: -0.035em;
+}
+
+.board__List__Options {
+  position: absolute;
+  left: 100%;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px 0px #0000000d;
+  border-radius: 12px;
+  top: 100%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.board__List__Options li {
+  list-style: none;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.035em;
+  color: #828282;
+  white-space: nowrap;
+  padding: 0.35rem 1rem;
+  padding-right: 3.55rem;
+  border-radius: 8px;
+  transition: 0.25s ease-in-out;
+  cursor: pointer;
+}
+
+.board__List__Options li:hover {
+  background-color: #f2f2f2;
+}
+
+.list__Name__Input {
+  outline: none;
+  border: none;
+  padding: 0.75rem 0.4rem;
+}
+
+.actions__Wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.delete__Confirm__Txt {
+  font-size: 0.75rem;
+}

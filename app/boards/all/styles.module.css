@@ -1,0 +1,26 @@
+.main__Wrap {
+  min-height: var(--min-content-height);
+  background-color: var(--pale-blue-bg-color);
+  padding: 3rem 11rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.all__Boards__Wrap {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .main__Wrap {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .all__Boards__Wrap {
+    flex-direction: column;
+  }
+}

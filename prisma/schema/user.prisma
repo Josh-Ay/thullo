@@ -1,0 +1,19 @@
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  oauthClientId String
+  oauthProvider String
+  profilePhoto  String?
+  boardsCreated Board[]
+  boardsJoined  BoardMembers[]
+  lists         List[]
+  cards         Card[]
+  comments      Comment[]
+  attachments   Attachment[]
+  cardsJoined   CardMembers[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@map("users")
+}
