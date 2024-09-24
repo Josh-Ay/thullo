@@ -45,7 +45,7 @@ const compileHtml = (
     const template = Handlebars.compile(inviteEmailTemplate);
 
     return template({
-        logoImg: `${process.env.SERVER_URL}/public/Logo.svg`,
+        logoImg: `${process.env.SERVER_URL}/Logo.svg`,
         senderName,
         content,
         itemTitle,

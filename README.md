@@ -41,7 +41,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://thullo-silk.vercel.app/">
       Demo
     </a>
     <span> | </span>
@@ -118,7 +118,7 @@ This application was created as a submission to a [DevChallenges](https://devcha
 
 - Create a `.env` file in the root directory of your cloned copy and copy and paste the following environment variables into it 
   ```txt
-  DATABASE_URL="postgresql://postgres:<password>@<server>/thulloDB"
+  POSTGRES_PRISMA_URL="postgresql://postgres:<password>@<server>/thulloDB"
   GOOGLE_ID=""
   GOOGLE_SECRET=""
   GITHUB_ID=""
@@ -131,7 +131,7 @@ This application was created as a submission to a [DevChallenges](https://devcha
   SERVER_URL="http://localhost:3000"
   ```
 
-  - Replace the `<password>` and `<server>` in the `DATABASE_URL` with your actual credentials to access a POSTGRES database
+  - Replace the `<password>` and `<server>` in the `POSTGRES_PRISMA_URL` with your actual credentials to access a POSTGRES database
   - To get the values for `GOOGLE_ID`, `GOOGLE_SECRET`, please have a look at this [link](https://support.google.com/cloud/answer/6158849?hl=en)
 
   - To get the values for `GITHUB_ID`, `GITHUB_SECRET`, please have a look at this [link](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app)
