@@ -2,6 +2,8 @@ import { defaultMetadata } from '@utils/utils';
 import { Metadata } from 'next';
 import styles from './styles.module.css';
 import InvitationPageContent from './contents';
+import { Suspense } from 'react';
+import Spinner from '@components/Spinner/Spinner';
 
 
 export const metadata: Metadata = {
@@ -11,7 +13,9 @@ export const metadata: Metadata = {
 
 const InvitePage = () => {
     return <section className={styles.main__Wrap}>
-        <InvitationPageContent />
+        <Suspense fallback={<Spinner />}>
+            <InvitationPageContent />
+        </Suspense>
     </section>
 }
 

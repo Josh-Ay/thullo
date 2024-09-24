@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { defaultMetadata } from '@utils/utils';
 import { Metadata } from 'next';
 import LoginPageContents from './contents';
+import { Suspense } from 'react';
+import Spinner from '@components/Spinner/Spinner';
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -27,7 +29,9 @@ const LoginPage = () => {
 
         <br />
 
-        <LoginPageContents />
+        <Suspense fallback={<Spinner />}>
+          <LoginPageContents />
+        </Suspense>
       </section>
     </section>
   )
