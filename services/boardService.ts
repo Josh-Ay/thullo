@@ -97,4 +97,27 @@ export class BoardService {
             throw Error(`${error}`);
         }
     }
+
+    async deleteBoardMember (data={}) {
+        try {
+            const res = await fetch(`${BoardService.routePrefix}/deleteMember`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const jsonData = await res.json();
+
+            if (!res.ok) {
+                toast.error(jsonData?.message);
+                throw Error(jsonData?.message);
+            }
+
+            toast.success(jsonData?.message);
+        } catch (error) {
+            throw Error(`${error}`);
+        }
+    } 
 }

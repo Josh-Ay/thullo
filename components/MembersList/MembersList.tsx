@@ -14,7 +14,7 @@ const MembersList = ({
     showMemberName = true,
     className,
     maxNumberToDisplay = null,
-
+    memberIdsBeingRemoved = [],
 }: {
     members: BoardMemberType[] | CardMemberType[],
     listOwnerId?: string,
@@ -23,11 +23,14 @@ const MembersList = ({
     handleRemoveMember?: (memberId: string) => void,
     showMemberName?: boolean,
     className?: string,
-        maxNumberToDisplay?: number | null,
+    maxNumberToDisplay?: number | null,
+    memberIdsBeingRemoved?: string[],
 }) => {
     return <section className={`${styles.members} ${className ?? ''}`}>
         {
             React.Children.toArray(members?.slice(0, maxNumberToDisplay ?? members?.length)?.map(member => {
+                const memberIsBeingRemoved = memberIdsBeingRemoved.includes(member.userId);
+                
                 return <section className={styles.member__Item}>
                     <section className={styles.member__Item__Detail}>
                         <Image
@@ -57,13 +60,14 @@ const MembersList = ({
                             showMemberActions && isListOwner ?
                                 <>
                                     <CustomButton
-                                        title='Remove'
+                                        title={memberIsBeingRemoved ? 'Removing...' : 'Remove'}
                                         border='1px solid #EB5757'
                                         color='#EB5757'
                                         fontSize='0.625rem'
                                         fontWeight='500'
                                         backgroundColor='transparent'
                                         handleClick={() => handleRemoveMember(member.userId)}
+                                        disabled={memberIsBeingRemoved}
                                     />
                                 </>
                                 :

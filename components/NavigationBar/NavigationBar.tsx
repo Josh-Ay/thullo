@@ -48,7 +48,7 @@ const NavigationBar = () => {
     useClickOutside({
         elemRef: navActionRef,
         handleClickOutside: () => setShowMobileMenu(false),
-    })
+    });
 
     useEffect(() => {
         if (status === 'loading') return;
@@ -110,7 +110,7 @@ const NavigationBar = () => {
                             !currentBoardDetails ? <></>
                                 :
                                 <>
-                                    <h3>{currentBoardDetails?.title}</h3>
+                                    <h3 className={styles.board__Title}>{currentBoardDetails?.title}</h3>
 
                                     {
                                         session && session?.user && session?.user.id && <>

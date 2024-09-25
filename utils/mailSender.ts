@@ -45,7 +45,7 @@ const compileHtml = (
     const template = Handlebars.compile(inviteEmailTemplate);
 
     return template({
-        logoImg: `https://thullo-silk.vercel.app/Logo.svg`,
+        logoImg: `https://thullo-silk.vercel.app/Logo-png.png`,
         senderName,
         content,
         itemTitle,

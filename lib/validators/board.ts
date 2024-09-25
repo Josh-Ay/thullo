@@ -1,11 +1,16 @@
 const Joi = require("joi");
 
 
-export const validateBoardDetails = (boardDetails = {}, isUpdate = false) => {
+export const validateBoardDetails = (boardDetails = {}, { isUpdate = false, isMemberDeleteRequest = false } = {}) => {
     const schema = isUpdate ? Joi.object({
         title: Joi.string().required().min(1),
         description: Joi.string().min(0),
         visibility: Joi.string().required().valid('private', 'public'),
+    })
+        :
+    isMemberDeleteRequest ? Joi.object({
+        userId: Joi.string().required(),
+        boardId: Joi.string().required(),
     })
         :
         Joi.object({

@@ -19,7 +19,7 @@ export async function PATCH(
 
     const data = await req.json();
 
-    const { value, error } = validateBoardDetails(data, true);
+    const { value, error } = validateBoardDetails(data, { isUpdate: true });
     if (error) return generateNextResponse(error.details[0]?.message, 400);
 
     try {

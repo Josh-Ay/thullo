@@ -6,7 +6,7 @@ import SessionWrapper from "@components/SessionWrapper/SessionWrapper";
 import { Toaster } from 'sonner';
 import AppContextProvider from "@contexts/AppContext";
 
-const poppins = Poppins({
+export const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '900'],
   style: ['normal', 'italic'],
   subsets: ['latin'],

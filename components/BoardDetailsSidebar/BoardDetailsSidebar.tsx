@@ -22,6 +22,7 @@ const BoardDetailsSidebar = ({
     const [copyOfCurrentBoardDetails, setCopyOfCurrentBoardDetails] = useState<BoardType | null>(null);
     const [editModeActive, setEditModeActive] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const [membersBeingRemoved, setMembersBeingRemoved] = useState<string[]>([]);
 
     const { data: session } = useSession();
 
@@ -75,8 +76,33 @@ const BoardDetailsSidebar = ({
         setEditModeActive(false);
     }
 
-    const handleRemoveMember = async (userIdToRemove: string) => {
+    const handleRemoveMember = async (userId: string) => {
+        const currentMembersBeingRemoved = membersBeingRemoved.slice();
+        if (currentMembersBeingRemoved.includes(userId)) return;
 
+        setMembersBeingRemoved([...currentMembersBeingRemoved, userId]);
+
+        const copyOfAllBoards: BoardType[] = allBoards.slice();
+        
+        try {
+            await boardService.deleteBoardMember({
+                boardId: currentBoardDetails?.id,
+                userId,
+            });
+            
+            const foundBoard = copyOfAllBoards.find(board => board.id === copyOfCurrentBoardDetails?.id);
+            if (!foundBoard) return;
+
+            const copyOfCurrentBoardMembers = foundBoard.members?.slice();
+            foundBoard.members = copyOfCurrentBoardMembers?.filter(member => member.userId !== userId);
+
+            setCurrentBoardDetails(foundBoard);
+            setAllBoards(copyOfAllBoards);
+
+            setMembersBeingRemoved(currentMembersBeingRemoved);
+        } catch (error) {
+            setMembersBeingRemoved(currentMembersBeingRemoved);
+        }
     }
 
     if (!copyOfCurrentBoardDetails) return <></>
@@ -214,6 +240,7 @@ const BoardDetailsSidebar = ({
 
                 <MembersList
                     members={copyOfCurrentBoardDetails.members ?? []}
+                    memberIdsBeingRemoved={membersBeingRemoved}
                     isListOwner={session?.user?.id === copyOfCurrentBoardDetails.creator?.id}
                     listOwnerId={copyOfCurrentBoardDetails.creator?.id}
                     showMemberActions={true}

@@ -13,6 +13,7 @@ import { useSession } from 'next-auth/react';
 import { createPortal } from 'react-dom';
 import useScrollToElementInCanvas from './hooks/useScrollToElementInCanvas';
 
+let dragOverEmptyListTimeout: ReturnType<typeof setTimeout> | null, dragOverCardsTimeout: ReturnType<typeof setTimeout> | null, dragEndUpdateTimeout: ReturnType<typeof setTimeout> | null;
 
 const BoardCanvas = () => {
     const { data: session } = useSession();
@@ -58,12 +59,19 @@ const BoardCanvas = () => {
             setNewListLoading(false);
 
             const copyOfAllBoards: BoardType[] = allBoards.slice();
-            const foundBoard = copyOfAllBoards.find(item => item.id === currentBoardDetails.id);
-            if (foundBoard) {
-                const copyOfBoardExistingLists = foundBoard.lists?.slice();
+            const foundBoardIndex = copyOfAllBoards.findIndex(item => item.id === currentBoardDetails.id);
+
+            if (foundBoardIndex !== -1) {
+                const copyOfCurrentBoard: BoardType = JSON.parse(JSON.stringify(currentBoardDetails));
+                
+                const copyOfBoardExistingLists = copyOfCurrentBoard.lists?.slice();
                 copyOfBoardExistingLists?.push(newListData);
 
-                foundBoard.lists = copyOfBoardExistingLists;
+                copyOfCurrentBoard.lists = copyOfBoardExistingLists;
+
+                copyOfAllBoards[foundBoardIndex] = copyOfCurrentBoard;
+
+                setCurrentBoardDetails(copyOfCurrentBoard);
                 setAllBoards(copyOfAllBoards);
             }
 
@@ -136,6 +144,9 @@ const BoardCanvas = () => {
         if (!itemDragged || !itemToReplace) return;
         if (itemDragged?.item?.id === itemToReplace?.item?.id) return;
 
+        if (dragOverEmptyListTimeout) clearTimeout(dragOverEmptyListTimeout);
+        if (dragOverCardsTimeout) clearTimeout(dragOverCardsTimeout);
+
         if (activeCardBeingDragged.item !== null) {
             const { item: cardBeingDragged } = itemDragged;
             const { item: itemWithDragOver, type } = itemToReplace;
@@ -164,15 +175,23 @@ const BoardCanvas = () => {
                 ];
 
                 foundActiveBoardList.cards = copyOfCardsForActiveBoardList.filter(item => item.id !== cardBeingDragged?.id);
+                
                 const copyOfCardBeingDragged = { ...cardBeingDragged };
                 copyOfCardBeingDragged.listId = foundOverBoardList.id;
 
-                foundOverBoardList.cards.push(copyOfCardBeingDragged);
+                foundOverBoardList.cards = [...copyOfCardsForOverBoardList, copyOfCardBeingDragged];
 
                 setCurrentBoardDetails(copyOfCurrentBoard);
+                
+                const copyOfAllBoards: BoardType[] = allBoards.slice();
+                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === copyOfCurrentBoard.id);
+                if (foundBoardIndex !== -1) {
+                    copyOfAllBoards[foundBoardIndex] = copyOfCurrentBoard;
+                    setAllBoards(copyOfAllBoards);
+                }
 
                 // setting a timeout before calling the API incase the user is still holding onto the dragged item
-                setTimeout(() => {
+                dragOverEmptyListTimeout = setTimeout(() => {
                     saveUpdatesToCardOrderInList(
                         foundOverBoardList.cards.map(item => {
                             return {
@@ -190,6 +209,13 @@ const BoardCanvas = () => {
 
                             foundOverBoardList.cards = copyOfCardsForOverBoardList;
                             setCurrentBoardDetails(boardDetailsCopy);
+
+                            const copyOfAllBoards: BoardType[] = allBoards.slice();
+                            const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
+                            if (foundBoardIndex !== -1) {
+                                copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
+                                setAllBoards(copyOfAllBoards);
+                            }
                         },
                     );
                 }, 1200);
@@ -234,8 +260,15 @@ const BoardCanvas = () => {
 
                 setCurrentBoardDetails(copyOfCurrentBoard);
 
+                const copyOfAllBoards: BoardType[] = allBoards.slice();
+                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === copyOfCurrentBoard.id);
+                if (foundBoardIndex !== -1) {
+                    copyOfAllBoards[foundBoardIndex] = copyOfCurrentBoard;
+                    setAllBoards(copyOfAllBoards);
+                }
+
                 // setting a timeout before calling the API incase the user is still holding onto the dragged item
-                setTimeout(() => {
+                dragOverCardsTimeout = setTimeout(() => {
                     Promise.all([
                         foundActiveBoardList.cards.length > 0 && saveUpdatesToCardOrderInList(
                             foundActiveBoardList.cards.map(item => {
@@ -254,6 +287,13 @@ const BoardCanvas = () => {
 
                                 foundActiveBoardList.cards = copyOfCardsForActiveBoardList;
                                 setCurrentBoardDetails(boardDetailsCopy);
+
+                                const copyOfAllBoards: BoardType[] = allBoards.slice();
+                                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
+                                if (foundBoardIndex !== -1) {
+                                    copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
+                                    setAllBoards(copyOfAllBoards);
+                                }
                             }
                         ),
                         saveUpdatesToCardOrderInList(
@@ -273,6 +313,13 @@ const BoardCanvas = () => {
 
                                 foundOverBoardList.cards = copyOfCardsForOverBoardList;
                                 setCurrentBoardDetails(boardDetailsCopy);
+
+                                const copyOfAllBoards: BoardType[] = allBoards.slice();
+                                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
+                                if (foundBoardIndex !== -1) {
+                                    copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
+                                    setAllBoards(copyOfAllBoards);
+                                }
                             }
                         )
                     ])
@@ -296,6 +343,8 @@ const BoardCanvas = () => {
         const copyOfBoardLists = copyOfCurrentBoard.lists?.slice();
 
         if (itemDragged?.item?.id === itemToReplace?.item?.id) return resetActiveDragItems();
+
+        if (dragEndUpdateTimeout) clearTimeout(dragEndUpdateTimeout);
 
         // for cards reordering
         if (activeCardBeingDragged.item !== null) {
@@ -337,6 +386,14 @@ const BoardCanvas = () => {
                 // console.log('updated cards list -> ', updatedCardsList);
 
                 setCurrentBoardDetails(copyOfCurrentBoard);
+                
+                const copyOfAllBoards: BoardType[] = allBoards.slice();
+                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === copyOfCurrentBoard.id);
+                if (foundBoardIndex !== -1) {
+                    copyOfAllBoards[foundBoardIndex] = copyOfCurrentBoard;
+                    setAllBoards(copyOfAllBoards);
+                }
+
                 resetActiveDragItems();
 
                 saveUpdatesToCardOrderInList(
@@ -356,6 +413,13 @@ const BoardCanvas = () => {
 
                         foundBoardList.cards = currentCardsList;
                         setCurrentBoardDetails(boardDetailsCopy);
+
+                        const copyOfAllBoards: BoardType[] = allBoards.slice();
+                        const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
+                        if (foundBoardIndex !== -1) {
+                            copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
+                            setAllBoards(copyOfAllBoards);
+                        }
                     }
                 );
 
@@ -398,9 +462,17 @@ const BoardCanvas = () => {
             // console.log('updated board lists -> ', updatedBoardListing);
 
             setCurrentBoardDetails(copyOfCurrentBoard);
+
+            const copyOfAllBoards: BoardType[] = allBoards.slice();
+            const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === copyOfCurrentBoard.id);
+            if (foundBoardIndex !== -1) {
+                copyOfAllBoards[foundBoardIndex] = copyOfCurrentBoard;
+                setAllBoards(copyOfAllBoards);
+            }
+
             resetActiveDragItems();
 
-            setTimeout(() => {
+            dragEndUpdateTimeout = setTimeout(() => {
                 saveUpdatesToListOrderInBoard(
                     {
                         lists: updatedBoardListing.map(item => {
@@ -415,6 +487,13 @@ const BoardCanvas = () => {
                         boardDetailsCopy.lists = copyOfBoardLists;
 
                         setCurrentBoardDetails(boardDetailsCopy);
+
+                        const copyOfAllBoards: BoardType[] = allBoards.slice();
+                        const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
+                        if (foundBoardIndex !== -1) {
+                            copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
+                            setAllBoards(copyOfAllBoards);
+                        }
                     }
                 )
             }, 800);

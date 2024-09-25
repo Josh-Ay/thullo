@@ -42,7 +42,7 @@
   gap: 1.5rem;
 }
 
-.board__Detail__Wrap h3 {
+.board__Title {
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 27px;

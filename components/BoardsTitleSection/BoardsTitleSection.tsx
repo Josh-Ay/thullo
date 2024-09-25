@@ -66,6 +66,7 @@ const BoardsTitleSection = ({
 
     const handleCreateNewBoard = async () => {
         if (newBoardDetails.title.length < 1) return toast.info("Please enter a title");
+        if (newBoardDetails.coverImage.length < 1) return toast.info("Please select a cover image");
         if (dataLoading) return;
 
         setDataLoading(true);
