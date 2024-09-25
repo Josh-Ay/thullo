@@ -155,7 +155,7 @@ const BoardCanvas = () => {
             const copyOfBoardLists = copyOfCurrentBoard.lists?.slice();
 
             // card is dragged over a list (most likely an empty one)
-            if (type === ItemDragTypes.List && !itemWithDragOver.listId && itemWithDragOver.listIndex) {
+            if (type === ItemDragTypes.List && !itemWithDragOver.listId && itemWithDragOver.listIndex !== undefined) {
                 const [
                     foundActiveBoardList,
                     foundOverBoardList,
@@ -179,7 +179,7 @@ const BoardCanvas = () => {
                 const copyOfCardBeingDragged = { ...cardBeingDragged };
                 copyOfCardBeingDragged.listId = foundOverBoardList.id;
 
-                if (!foundOverBoardList.cards.find(card => card.id === copyOfCardBeingDragged.id)) foundOverBoardList.cards = [...copyOfCardsForOverBoardList, copyOfCardBeingDragged];
+                if (!copyOfCardsForOverBoardList.find(card => card.id === copyOfCardBeingDragged.id)) foundOverBoardList.cards = [...copyOfCardsForOverBoardList, copyOfCardBeingDragged];
 
                 setCurrentBoardDetails(copyOfCurrentBoard);
                 
@@ -252,7 +252,8 @@ const BoardCanvas = () => {
                 copyOfCardBeingDragged.listId = foundOverBoardList.id;
                 
                 foundActiveBoardList.cards = copyOfCardsForActiveBoardList.filter(item => item.id !== cardBeingDragged?.id);
-                if (!foundOverBoardList.cards.find(card => card.id === copyOfCardBeingDragged.id)) foundOverBoardList.cards = [
+
+                if (!copyOfCardsForOverBoardList.find(card => card.id === copyOfCardBeingDragged.id)) foundOverBoardList.cards = [
                     ...copyOfCardsForOverBoardList.slice(0, indexOfItemToReplace),
                     copyOfCardBeingDragged,
                     ...copyOfCardsForOverBoardList.slice(indexOfItemToReplace)
