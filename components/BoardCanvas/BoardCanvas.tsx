@@ -179,7 +179,7 @@ const BoardCanvas = () => {
                 const copyOfCardBeingDragged = { ...cardBeingDragged };
                 copyOfCardBeingDragged.listId = foundOverBoardList.id;
 
-                foundOverBoardList.cards = [...copyOfCardsForOverBoardList, copyOfCardBeingDragged];
+                if (!foundOverBoardList.cards.find(card => card.id === copyOfCardBeingDragged.id)) foundOverBoardList.cards = [...copyOfCardsForOverBoardList, copyOfCardBeingDragged];
 
                 setCurrentBoardDetails(copyOfCurrentBoard);
                 
@@ -252,7 +252,7 @@ const BoardCanvas = () => {
                 copyOfCardBeingDragged.listId = foundOverBoardList.id;
                 
                 foundActiveBoardList.cards = copyOfCardsForActiveBoardList.filter(item => item.id !== cardBeingDragged?.id);
-                foundOverBoardList.cards = [
+                if (!foundOverBoardList.cards.find(card => card.id === copyOfCardBeingDragged.id)) foundOverBoardList.cards = [
                     ...copyOfCardsForOverBoardList.slice(0, indexOfItemToReplace),
                     copyOfCardBeingDragged,
                     ...copyOfCardsForOverBoardList.slice(indexOfItemToReplace)
