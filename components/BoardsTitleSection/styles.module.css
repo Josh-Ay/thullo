@@ -134,6 +134,7 @@
 @media screen and (max-width: 767px) {
   .new__Board__Modal {
     width: 95%;
+    max-height: 75dvh;
   }
 
   .no__Image__Content,

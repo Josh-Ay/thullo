@@ -13,6 +13,7 @@ export async function GET(req: Request) {
 
     try {
         const foundUsers = await prismaClient.user.findMany({
+            take: 50,
             where: {
                 email: {
                     contains: searchQuery,

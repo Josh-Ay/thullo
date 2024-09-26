@@ -62,7 +62,7 @@ export async function POST(req: Request) {
     const inviteEmailContent = compileHtml(userSession.name, itemTitle, inviteLink);
     const receivers = value.users?.map((user: UserSearchType) => user?.email);
 
-    sendEmail(receivers, `New ${inviteType} invitation`, inviteEmailContent);
+    await sendEmail(receivers, `New ${inviteType} invitation`, inviteEmailContent);
 
     return generateNextResponse(`Successfully sent invitation emails to ${receivers.length} user(s)`);
 }
