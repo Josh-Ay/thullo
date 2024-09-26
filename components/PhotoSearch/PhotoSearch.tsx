@@ -23,6 +23,10 @@ interface UnsplashUserLinksDetail {
     html: string;
 }
 
+interface UnsplashLinkDetails {
+    download_location: string;
+}
+
 interface UnsplashUserObject {
     name: string;
     links: UnsplashUserLinksDetail;
@@ -31,6 +35,7 @@ interface UnsplashUserObject {
 interface UnsplashSearchResult {
     urls: UnsplashURLObject;
     user: UnsplashUserObject;
+    links: UnsplashLinkDetails;
 }
 
 
@@ -66,6 +71,14 @@ const PhotoSearch = ({
 
         return () => clearTimeout(fetchImages);
     }, [searchValue]);
+
+    const handleMakeDownloadRequestToUnsplash = async (imageUrl: string) => {
+        try {
+            await searchService.makeDownloadRequestToUnsplash({ imageUrl });
+        } catch (error) {
+            
+        }
+    }
 
     return (
         <div className={`${styles.photo__Search} ${className}`}>
@@ -107,7 +120,10 @@ const PhotoSearch = ({
                                     }}
                                     className={styles.result__img}
                                     sizes='100vw'
-                                    onClick={() => handleSelectPhoto(result?.urls?.regular, result?.user?.name, result?.user?.links?.html)}
+                                    onClick={() => {
+                                        handleSelectPhoto(result?.urls?.regular, result?.user?.name, result?.user?.links?.html);
+                                        handleMakeDownloadRequestToUnsplash(result?.links?.download_location);
+                                    }}
                                     priority
                                 />
                             }))

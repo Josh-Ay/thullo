@@ -15,4 +15,25 @@ export class PhotoSearchService {
             throw Error(`${error}`)
         }
     }
+
+    async makeDownloadRequestToUnsplash(data={}) {
+        try {
+            const res = await fetch(`${PhotoSearchService.routePrefix}/download`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const jsonData = await res.json();
+
+            if (!res.ok) {
+                throw Error(jsonData?.message);
+            }
+            
+        } catch (error) {
+            throw Error(`${error}`);
+        }
+    }
 }

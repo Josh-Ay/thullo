@@ -217,7 +217,7 @@ const CardDetails = ({
                                         cardDetailsCopy?.coverImageAuthor && cardDetailsCopy?.coverImageAuthorProfile &&
                                         <p className={styles.author__Details}>
                                             <span>
-                                                Photo by <Link href={cardDetailsCopy?.coverImageAuthorProfile} target='_blank' rel='noreferrer noopener'>{cardDetailsCopy?.coverImageAuthor}</Link> on <Link href={unsplashSiteLink} target='_blank' rel='noreferrer noopener'>Unsplash</Link>
+                                                Photo by <Link href={`${cardDetailsCopy?.coverImageAuthorProfile}?utm_source=thullo_app&utm_medium=referral`} target='_blank' rel='noreferrer noopener'>{cardDetailsCopy?.coverImageAuthor}</Link> on <Link href={unsplashSiteLink} target='_blank' rel='noreferrer noopener'>Unsplash</Link>
                                             </span>
                                         </p>
                                     }

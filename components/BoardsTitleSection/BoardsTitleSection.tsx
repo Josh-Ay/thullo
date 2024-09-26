@@ -152,7 +152,7 @@ const BoardsTitleSection = ({
                                                 newBoardDetails.coverImageAuthor.length > 1 && newBoardDetails.coverImageAuthorProfile.length > 1 &&
                                                 <p className={styles.author__Details}>
                                                     <span>
-                                                        Photo by <Link href={newBoardDetails.coverImageAuthorProfile} target='_blank' rel='noreferrer noopener'>{newBoardDetails.coverImageAuthor}</Link> on <Link href={unsplashSiteLink} target='_blank' rel='noreferrer noopener'>Unsplash</Link>
+                                                        Photo by <Link href={`${newBoardDetails.coverImageAuthorProfile}?utm_source=thullo_app&utm_medium=referral`} target='_blank' rel='noreferrer noopener'>{newBoardDetails.coverImageAuthor}</Link> on <Link href={unsplashSiteLink} target='_blank' rel='noreferrer noopener'>Unsplash</Link>
                                                     </span>
                                                 </p>
                                             }
