@@ -66,6 +66,8 @@ export async function POST(req: Request) {
     }
 
     if (inviteType === ValidInviteTypes.cardInvite) {
+        if (existingBoard.creatorId === userSession.userId) return generateNextResponse('You already have access to all cards as the creator of this board', 403);
+
         try {
             const existingCardMember = await prismaClient.cardMembers.findFirst({
                 where: {
