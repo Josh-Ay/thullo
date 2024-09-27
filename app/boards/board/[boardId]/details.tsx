@@ -66,7 +66,7 @@ const SingleBoardPageDetails = ({
     });
 
     useEffect(() => {
-        if (currentBoardDetails) return;
+        if (currentBoardDetails) return setBoardLoading(false);
         
         if (!allBoardsLoaded) {
             boardService.getSingleBoardDetails(boardId).then(res => {

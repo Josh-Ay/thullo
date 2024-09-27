@@ -9,6 +9,7 @@ import Spinner from "@components/Spinner/Spinner";
 import { IoChatboxEllipsesOutline, IoStatsChartOutline } from "react-icons/io5";
 import { GoWorkflow } from "react-icons/go";
 import { formatDateAndTimeForApp } from "@utils/utils";
+import { useAppContext } from "@contexts/AppContext";
 
 
 const ProfileDetails = ({
@@ -16,12 +17,17 @@ const ProfileDetails = ({
 }: {
     id: string,
 }) => {
+    const {
+        setCurrentBoardDetails
+    } = useAppContext();
+    
     const [dataLoading, setDataLoading] = useState(false);
     const [userDetails, setUserDetails] = useState<UserProfileType | null>(null);
 
     const userService = new UserService();
 
     useEffect(() => {
+        setCurrentBoardDetails(null);
         setDataLoading(true);
 
         userService.getUserDetails(id).then(res => {
