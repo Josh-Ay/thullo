@@ -112,6 +112,20 @@ const BoardCanvas = () => {
         setActiveCardBeingDragged(initialDragItemActive);
     }
 
+    const checkIfBoardsAreEqual = (boardOne: BoardType, boardTwo: BoardType) => JSON.stringify(boardOne) === JSON.stringify(boardTwo);
+
+    const updateBoardDetails = (boardDetails: BoardType) => {
+        const copyOfAllBoards: BoardType[] = allBoards.slice();
+        const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetails.id);
+
+        if (foundBoardIndex !== -1) {
+            copyOfAllBoards[foundBoardIndex] = boardDetails;
+
+            if (currentBoardDetails && !checkIfBoardsAreEqual(currentBoardDetails, boardDetails)) setCurrentBoardDetails(boardDetails);
+            setAllBoards(copyOfAllBoards);
+        }
+    }
+
     const handleDragStart = (event: DragStartEvent) => {
         const { active: { data } } = event;
         const { current } = data;
@@ -181,14 +195,7 @@ const BoardCanvas = () => {
 
                 if (!copyOfCardsForOverBoardList.find(card => card.id === copyOfCardBeingDragged.id)) foundOverBoardList.cards = [...copyOfCardsForOverBoardList, copyOfCardBeingDragged];
 
-                setCurrentBoardDetails(copyOfCurrentBoard);
-                
-                const copyOfAllBoards: BoardType[] = allBoards.slice();
-                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === copyOfCurrentBoard.id);
-                if (foundBoardIndex !== -1) {
-                    copyOfAllBoards[foundBoardIndex] = copyOfCurrentBoard;
-                    setAllBoards(copyOfAllBoards);
-                }
+                updateBoardDetails(copyOfCurrentBoard);
 
                 // setting a timeout before calling the API incase the user is still holding onto the dragged item
                 dragOverEmptyListTimeout = setTimeout(() => {
@@ -208,14 +215,8 @@ const BoardCanvas = () => {
                             if (!foundOverBoardList) return;
 
                             foundOverBoardList.cards = copyOfCardsForOverBoardList;
-                            setCurrentBoardDetails(boardDetailsCopy);
 
-                            const copyOfAllBoards: BoardType[] = allBoards.slice();
-                            const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
-                            if (foundBoardIndex !== -1) {
-                                copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
-                                setAllBoards(copyOfAllBoards);
-                            }
+                            updateBoardDetails(boardDetailsCopy);
                         },
                     );
                 }, 1200);
@@ -259,14 +260,7 @@ const BoardCanvas = () => {
                     ...copyOfCardsForOverBoardList.slice(indexOfItemToReplace)
                 ];
 
-                setCurrentBoardDetails(copyOfCurrentBoard);
-
-                const copyOfAllBoards: BoardType[] = allBoards.slice();
-                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === copyOfCurrentBoard.id);
-                if (foundBoardIndex !== -1) {
-                    copyOfAllBoards[foundBoardIndex] = copyOfCurrentBoard;
-                    setAllBoards(copyOfAllBoards);
-                }
+                updateBoardDetails(copyOfCurrentBoard);
 
                 // setting a timeout before calling the API incase the user is still holding onto the dragged item
                 dragOverCardsTimeout = setTimeout(() => {
@@ -287,14 +281,8 @@ const BoardCanvas = () => {
                                 if (!foundActiveBoardList) return;
 
                                 foundActiveBoardList.cards = copyOfCardsForActiveBoardList;
-                                setCurrentBoardDetails(boardDetailsCopy);
 
-                                const copyOfAllBoards: BoardType[] = allBoards.slice();
-                                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
-                                if (foundBoardIndex !== -1) {
-                                    copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
-                                    setAllBoards(copyOfAllBoards);
-                                }
+                                updateBoardDetails(boardDetailsCopy);
                             }
                         ),
                         saveUpdatesToCardOrderInList(
@@ -313,14 +301,8 @@ const BoardCanvas = () => {
                                 if (!foundOverBoardList) return;
 
                                 foundOverBoardList.cards = copyOfCardsForOverBoardList;
-                                setCurrentBoardDetails(boardDetailsCopy);
 
-                                const copyOfAllBoards: BoardType[] = allBoards.slice();
-                                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
-                                if (foundBoardIndex !== -1) {
-                                    copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
-                                    setAllBoards(copyOfAllBoards);
-                                }
+                                updateBoardDetails(boardDetailsCopy);
                             }
                         )
                     ])
@@ -386,14 +368,7 @@ const BoardCanvas = () => {
                 foundBoardList.cards = updatedCardsList;
                 // console.log('updated cards list -> ', updatedCardsList);
 
-                setCurrentBoardDetails(copyOfCurrentBoard);
-                
-                const copyOfAllBoards: BoardType[] = allBoards.slice();
-                const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === copyOfCurrentBoard.id);
-                if (foundBoardIndex !== -1) {
-                    copyOfAllBoards[foundBoardIndex] = copyOfCurrentBoard;
-                    setAllBoards(copyOfAllBoards);
-                }
+                updateBoardDetails(copyOfCurrentBoard);
 
                 resetActiveDragItems();
 
@@ -413,14 +388,8 @@ const BoardCanvas = () => {
                         if (!foundBoardList) return;
 
                         foundBoardList.cards = currentCardsList;
-                        setCurrentBoardDetails(boardDetailsCopy);
 
-                        const copyOfAllBoards: BoardType[] = allBoards.slice();
-                        const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
-                        if (foundBoardIndex !== -1) {
-                            copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
-                            setAllBoards(copyOfAllBoards);
-                        }
+                        updateBoardDetails(boardDetailsCopy);
                     }
                 );
 
@@ -462,14 +431,7 @@ const BoardCanvas = () => {
             copyOfCurrentBoard.lists = updatedBoardListing;
             // console.log('updated board lists -> ', updatedBoardListing);
 
-            setCurrentBoardDetails(copyOfCurrentBoard);
-
-            const copyOfAllBoards: BoardType[] = allBoards.slice();
-            const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === copyOfCurrentBoard.id);
-            if (foundBoardIndex !== -1) {
-                copyOfAllBoards[foundBoardIndex] = copyOfCurrentBoard;
-                setAllBoards(copyOfAllBoards);
-            }
+            updateBoardDetails(copyOfCurrentBoard);
 
             resetActiveDragItems();
 
@@ -487,14 +449,7 @@ const BoardCanvas = () => {
                         const boardDetailsCopy: BoardType = JSON.parse(JSON.stringify(currentBoardDetails));
                         boardDetailsCopy.lists = copyOfBoardLists;
 
-                        setCurrentBoardDetails(boardDetailsCopy);
-
-                        const copyOfAllBoards: BoardType[] = allBoards.slice();
-                        const foundBoardIndex = copyOfAllBoards.findIndex(board => board.id === boardDetailsCopy.id);
-                        if (foundBoardIndex !== -1) {
-                            copyOfAllBoards[foundBoardIndex] = boardDetailsCopy;
-                            setAllBoards(copyOfAllBoards);
-                        }
+                        updateBoardDetails(boardDetailsCopy);
                     }
                 )
             }, 800);
